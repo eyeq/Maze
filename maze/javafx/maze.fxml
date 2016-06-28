@@ -1,0 +1,48 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+
+<VBox fx:controller="maze.javafx.Controller" xmlns:fx="http://javafx.com/fxml" alignment="center" spacing="10">
+    <HBox alignment="center" spacing="10">
+        <Label text="width(5-99):" />
+        <Spinner fx:id ="widthSpinner" prefWidth="80" />
+        <Label text="height(5-99):" />
+        <Spinner fx:id="heightSpinner" prefWidth="80" />
+    </HBox>
+    <HBox alignment="center" spacing="10">
+        <ComboBox fx:id="generationCombo" />
+        <Button fx:id="generationButton" text="迷路生成" onAction="#onGenerationButtonClicked" />
+        <Label text="seed(long):" />
+        <TextField fx:id="generationSeed" />
+    </HBox>
+    <HBox alignment="center" spacing="10">
+        <ComboBox fx:id="searchCombo" />
+        <Button fx:id="searchButton" text="迷路探索" onAction="#onSearchButtonClicked" />
+        <Label text="seed(long):" />
+        <TextField fx:id="searchSeed" />
+    </HBox>
+    <HBox alignment="center" spacing="10">
+        <Label text="generation:" />
+        <Label fx:id="generationUsedTime" />
+        <Label text="search:" />
+        <Label fx:id="searchUsedTime" />
+    </HBox>
+    <HBox alignment="center" spacing="10">
+        <Button text="再生/停止" onAction="#onPlayButtonClicked"/>
+        <Button text="速度変化" onAction="#onSpeedButtonClicked" />
+        <Slider fx:id="logSlider" />
+        <Label fx:id="logLabel" prefWidth="100" />
+    </HBox>
+    <HBox alignment="center" spacing="10">
+        <ScrollPane fx:id="mazePane">
+            <Canvas fx:id="mazeCanvas" />
+        </ScrollPane>
+    </HBox>
+</VBox>
