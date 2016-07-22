@@ -39,13 +39,13 @@ public class KruskalMazeBuilder extends AbstractMazeBuilder {
     }
 
     private void unionFind(List<Pair<Point, int[]>> edges) {
-        UnionFind unionFind = new UnionFind((1 + getWidth()) * getHeight());
+        UnionFind unionFind = new UnionFind((getWidth() + 1) * getHeight());
         for(Pair<Point, int[]> edge : edges) {
             Point point = edge.getKey();
             int[] d = edge.getValue();
             int x = point.x + point.y * getWidth();
             int y = (point.x + 2 * d[0]) + (point.y + 2 * d[1]) * getWidth();
-            if(unionFind.union(x, y) && isExist(point.x + 2 * d[0], point.y + 2 * d[1])) {
+            if(isExist(point.x + 2 * d[0], point.y + 2 * d[1]) && unionFind.union(x, y)) {
                 setData(point.x, point.y, MazeData.Tile.PATH);
                 setData(point.x + d[0], point.y + d[1], MazeData.Tile.PATH);
                 setData(point.x + 2 * d[0], point.y + 2 * d[1], MazeData.Tile.PATH);

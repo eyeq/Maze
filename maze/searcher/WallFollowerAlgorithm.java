@@ -5,12 +5,11 @@ import maze.MazeData;
 import java.awt.*;
 import java.util.List;
 
-
-public class WallFollower implements IMoveMethod {
+public class WallFollowerAlgorithm implements IMoveAlgorithm {
     private Direction preDirection = Direction.NORTH;
 
     @Override
-    public Direction getMoveDirection(Point current, Point entrance, Point exsist, MazeData mazeData, List<Direction> canMoves) {
+    public Direction getMoveDirection(Point current, Point entrance, Point destination, MazeData mazeData, List<Direction> canMoves) {
         Direction[] directions = {Direction.NORTH, Direction.NORTH_WEST, Direction.WEST, Direction.SOUTH_WEST,
                 Direction.SOUTH, Direction.SOUTH_EAST, Direction.EAST, Direction.NORTH_EAST,
                 null, null, null, null, null, null, null, null};

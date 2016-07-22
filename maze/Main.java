@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import maze.javafx.fxml.Finalizable;
 
 public class Main extends Application {
 
@@ -12,12 +13,24 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Maze Generation & Search Algorithm");
 
-        Parent root = FXMLLoader.load(getClass().getResource("javafx/maze.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("javafx/maze.fxml"));
+        Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-        primaryStage.setWidth(primaryStage.getWidth() + 20);
-        primaryStage.setHeight(primaryStage.getHeight() + 20);
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(480);
+
+        primaryStage.setOnCloseRequest(event -> {
+            Object controller = loader.getController();
+            if(controller instanceof Finalizable) {
+                ((Finalizable) controller).finalize(loader.getLocation(), loader.getResources());
+            }
+
+            // TODO save file
+            // System.out.println(primaryStage.getWidth());
+            // System.out.println(primaryStage.getHeight());
+        });
     }
 
     public static void main(String[] args) {

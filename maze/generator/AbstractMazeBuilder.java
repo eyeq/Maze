@@ -13,9 +13,18 @@ public abstract class AbstractMazeBuilder implements IMazeBuilder {
     private int height;
 
     public AbstractMazeBuilder(int width, int height) {
-        this.width = Math.max(2, width);
-        this.height = Math.max(2, height);
+        this.width = Math.max(5, width);
+        this.height = Math.max(5, height);
         data = new MazeData.Tile[getWidth()][getHeight()];
+    }
+
+    public AbstractMazeBuilder(MazeData data) {
+        this(data.getWidth(), data.getHeight());
+        for(int x = 0; x < getWidth(); x++) {
+            for(int y = 0; y < getHeight(); y++) {
+                setData(x, y, data.getTile(x, y));
+            }
+        }
     }
 
     protected abstract MazeData.Tile getFillTile();

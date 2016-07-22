@@ -10,14 +10,14 @@ import java.util.List;
 
 public class MazeExplorer {
     private EventHandler<? super MoveEvent> moveEventHandler;
-    private IMoveMethod moveMethod;
+    private IMoveAlgorithm moveMethod;
 
     private Point start;
     private Point current;
     private Point destination;
     private MazeData mazeData;
 
-    public MazeExplorer(IMoveMethod moveMethod, Point current, Point destination, MazeData mazeData) {
+    public MazeExplorer(IMoveAlgorithm moveMethod, Point current, Point destination, MazeData mazeData) {
         setMoveMethod(moveMethod);
         this.current = current;
         this.start = current;
@@ -26,7 +26,7 @@ public class MazeExplorer {
     }
 
     public boolean move() {
-        IMoveMethod.Direction direction = moveMethod.getMoveDirection(new Point(current), new Point(start), new Point(destination), mazeData, getCanMoves());
+        IMoveAlgorithm.Direction direction = moveMethod.getMoveDirection(new Point(current), new Point(start), new Point(destination), mazeData, getCanMoves());
         if(!canMove(direction)) {
             return false;
         }
@@ -40,7 +40,7 @@ public class MazeExplorer {
         return true;
     }
 
-    public void setMoveMethod(IMoveMethod moveMethod) {
+    public void setMoveMethod(IMoveAlgorithm moveMethod) {
         this.moveMethod = moveMethod;
     }
 
@@ -52,7 +52,10 @@ public class MazeExplorer {
         return current.y;
     }
 
-    public boolean canMove(IMoveMethod.Direction direction) {
+    public boolean canMove(IMoveAlgorithm.Direction direction) {
+        if(direction == null) {
+            return false;
+        }
         int dx = direction.getDx();
         int dy = direction.getDy();
         int x = current.x;
@@ -60,9 +63,9 @@ public class MazeExplorer {
         return mazeData.isMazePath(x+dx, y+dy) && (mazeData.isMazePath(x+dx, y) || mazeData.isMazePath(x, y+dy));
     }
 
-    public java.util.List<IMoveMethod.Direction> getCanMoves() {
-        List directions = new ArrayList<IMoveMethod.Direction>();
-        for(IMoveMethod.Direction direction : IMoveMethod.Direction.values()) {
+    public java.util.List<IMoveAlgorithm.Direction> getCanMoves() {
+        List directions = new ArrayList<IMoveAlgorithm.Direction>();
+        for(IMoveAlgorithm.Direction direction : IMoveAlgorithm.Direction.values()) {
             if(canMove(direction)) {
                 directions.add(direction);
             }

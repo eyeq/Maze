@@ -1,14 +1,14 @@
-package maze.javafx;
+package maze.javafx.event;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 
-public class HandScrollListener {
+public class HandScrollEventListener {
     private double oldClickedX;
     private double oldClickedY;
     private double scrollSpeed;
 
-    public HandScrollListener(double scrollSpeed) {
+    public HandScrollEventListener(double scrollSpeed) {
         setScrollSpeed(scrollSpeed);
     }
 

@@ -1,0 +1,19 @@
+.play-button {
+    -fx-background-color: null;
+    -fx-border-image-slice: 0 0 0 0 fill;
+    -fx-border-image-source: url("../../resources/assets/textures/play.png");
+}
+
+.play-button:selected {
+    -fx-border-image-source: url("../../resources/assets/textures/stop.png");
+}
+
+.speed-button {
+    -fx-background-color: null;
+    -fx-border-image-slice: 0 0 0 0 fill;
+    -fx-border-image-source: url("../../resources/assets/textures/slow.png");
+}
+
+.speed-button:selected {
+    -fx-border-image-source: url("../../resources/assets/textures/fast.png");
+}

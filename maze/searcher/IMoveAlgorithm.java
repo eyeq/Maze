@@ -5,8 +5,8 @@ import maze.MazeData;
 import java.awt.*;
 import java.util.List;
 
-public interface IMoveMethod {
-    Direction getMoveDirection(Point current, Point entrance, Point exsist, MazeData mazeData, List<Direction> canMoves);
+public interface IMoveAlgorithm {
+    Direction getMoveDirection(Point current, Point entrance, Point destination, MazeData mazeData, List<Direction> canMoves);
 
     enum Direction {
         EAST(1, 0),
