@@ -10,6 +10,7 @@ import java.util.List;
 
 public class MazeExplorer {
     private EventHandler<? super MoveEvent> moveEventHandler;
+
     private IMoveAlgorithm moveMethod;
 
     private Point start;
@@ -33,9 +34,9 @@ public class MazeExplorer {
         int nextX = current.x + direction.getDx();
         int nextY = current.y + direction.getDy();
         current.move(nextX, nextY);
-        if(getOnSearcherMoveed() != null) {
+        if(getOnSearcherMoved() != null) {
             MoveEvent event = new MoveEvent(this, null, direction);
-            getOnSearcherMoveed().handle(event);
+            getOnSearcherMoved().handle(event);
         }
         return true;
     }
@@ -73,11 +74,11 @@ public class MazeExplorer {
         return directions;
     }
 
-    public final void setOnSearcherMoveed(EventHandler<? super MoveEvent> value) {
+    public final void setOnSearcherMoved(EventHandler<? super MoveEvent> value) {
         moveEventHandler = value;
     }
 
-    public final EventHandler<? super MoveEvent> getOnSearcherMoveed() {
+    public final EventHandler<? super MoveEvent> getOnSearcherMoved() {
         return moveEventHandler;
     }
 }

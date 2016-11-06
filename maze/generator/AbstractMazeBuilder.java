@@ -1,13 +1,16 @@
 package maze.generator;
 
+import javafx.event.EventHandler;
 import maze.MazeData;
+import maze.generator.event.ChangeEvent;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class AbstractMazeBuilder implements IMazeBuilder {
+    private EventHandler<? super ChangeEvent> changeEventHandler;
+
     private MazeData.Tile[][] data;
     private int width;
     private int height;
@@ -43,6 +46,10 @@ public abstract class AbstractMazeBuilder implements IMazeBuilder {
 
     protected void setData(int x, int y, MazeData.Tile tile) {
         getData()[x][y] = tile;
+        if(getOnMazeChanged() != null) {
+            ChangeEvent event = new ChangeEvent(this, null, x, y, tile);
+            getOnMazeChanged().handle(event);
+        }
     }
 
     public MazeData.Tile getData(int x, int y) {
@@ -62,7 +69,7 @@ public abstract class AbstractMazeBuilder implements IMazeBuilder {
     public void buildFill() {
         for(int i = 0; i < getWidth(); i++) {
             for(int j = 0; j < getHeight(); j++) {
-                data[i][j] = getFillTile();
+                setData(i, j, getFillTile());
             }
         }
     }
@@ -91,5 +98,13 @@ public abstract class AbstractMazeBuilder implements IMazeBuilder {
         MazeData.Tile[] tiles = new MazeData.Tile[list.size()];
         list.toArray(tiles);
         return new MazeData(getWidth(), getHeight(), tiles);
+    }
+
+    public final void setOnMazeChanged(EventHandler<? super ChangeEvent> value) {
+        changeEventHandler = value;
+    }
+
+    public final EventHandler<? super ChangeEvent> getOnMazeChanged() {
+        return changeEventHandler;
     }
 }

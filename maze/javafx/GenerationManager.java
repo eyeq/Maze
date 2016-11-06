@@ -15,10 +15,10 @@ public class GenerationManager {
         register("棒倒し法", (wh, r) -> new DefeatStickMazeBuilder(wh[0], wh[1], r));
         register("穴掘り法（バックトラック法）", (wh, r) -> new DigHoleMazeBuilder(wh[0], wh[1], r));
         register("壁伸ばし法", (wh, r) -> new ExtendWallMazeBuilder(wh[0], wh[1], r));
+        register("再帰的分割法", (wh, r) -> new RecursiveDivisionMazeBuilder(wh[0], wh[1], r));
         register("バイナリツリー法", (wh, r) -> new BinaryTreeMazeBuilder(wh[0], wh[1], r));
         register("クラスカル法", (wh, r) -> new KruskalMazeBuilder(wh[0], wh[1], r));
         register("プリム法", (wh, r) -> new PrimMazeBuilder(wh[0], wh[1], r));
-        register("再帰的分割法", (wh, r) -> new RecursiveDivisionMazeBuilder(wh[0], wh[1], r));
     }
 
     private void register(String key, BiFunction<int[], Random, IMazeBuilder> generation) {

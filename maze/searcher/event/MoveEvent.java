@@ -6,8 +6,7 @@ import javafx.event.EventType;
 import maze.searcher.IMoveAlgorithm;
 
 public class MoveEvent extends Event {
-    public static final EventType<MoveEvent> MOVE = new EventType<MoveEvent>(Event.ANY, "MOVE");
-    public static final EventType<MoveEvent> ANY = MOVE;
+    public static final EventType<MoveEvent> MOVE = new EventType<>(Event.ANY, "MOVE");
 
     private final IMoveAlgorithm.Direction direction;
 

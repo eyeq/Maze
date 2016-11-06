@@ -21,57 +21,78 @@
         <URL value="@maze.css"/>
     </stylesheets>
     <GridPane alignment="CENTER" hgap="10" vgap="10">
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" alignment="CENTER_LEFT" spacing="10">
-            <Label text="width(5-99):" maxWidth="Infinity" prefHeight="20"/>
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
+            <Label text="迷路サイズ-横(5～99):" maxWidth="Infinity" prefHeight="20"/>
             <Spinner fx:id="widthSpinner" prefWidth="80" prefHeight="20"/>
-        </HBox>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER_LEFT" spacing="10">
-            <Label text="height(5-99):" maxWidth="Infinity" prefHeight="20"/>
+            <Label text="迷路サイズ-縦(5～99):" maxWidth="Infinity" prefHeight="20"/>
             <Spinner fx:id="heightSpinner" prefWidth="80" prefHeight="20"/>
         </HBox>
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER_RIGHT" spacing="10">
-            <VBox maxHeight="Infinity">
-                <ComboBox fx:id="generationCombo" maxWidth="Infinity"/>
-                <ComboBox fx:id="searchCombo" maxWidth="Infinity"/>
-            </VBox>
-            <VBox maxHeight="Infinity">
-                <Button text="新規生成" maxWidth="Infinity" onAction="#onGenerationButtonClicked"/>
-                <Button text="新規探索" maxWidth="Infinity" onAction="#onSearchButtonClicked"/>
-            </VBox>
-        </HBox>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER_LEFT" spacing="10">
-            <VBox maxHeight="Infinity">
-                <HBox>
-                    <Label text="seed(long):"/>
-                    <TextField fx:id="generationSeed"/>
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="10">
+            <VBox>
+                <HBox spacing="10">
+                    <CheckBox fx:id="randomGenerationCheck" text="ランダムな方法" prefHeight="20"/>
+                    <CheckBox fx:id="lfsrCheck" text="単調な迷路" prefHeight="20"/>
                 </HBox>
-                <HBox>
-                    <Label text="seed(long):"/>
-                    <TextField fx:id="searchSeed"/>
+                <HBox spacing="10">
+                    <ComboBox fx:id="generationCombo" prefHeight="20"/>
+                    <Button text="迷路の新規生成" onAction="#onGenerationButtonClicked"/>
+                </HBox>
+                <HBox spacing="10">
+                    <Label text="seed(long値):" prefHeight="20"/>
+                    <TextField fx:id="generationSeed" prefHeight="20"/>
+                    <Label text="生成にかかった時間:" prefHeight="20"/>
+                    <Label fx:id="generationUsedTimeLabel" prefWidth="100" prefHeight="20"/>
                 </HBox>
             </VBox>
-            <VBox alignment="CENTER" maxHeight="Infinity">
-                <CheckBox fx:id="lfsrCheck" text="単調"/>
-                <CheckBox fx:id="stopCheck" text="停止"/>
+        </HBox>
+        <HBox maxHeight="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2" spacing="10">
+            <VBox>
+                <HBox spacing="10">
+                    <CheckBox fx:id="randomSearchCheck" text="ランダムな方法" prefHeight="20"/>
+                </HBox>
+                <HBox spacing="10">
+                    <ComboBox fx:id="searchCombo" prefHeight="20"/>
+                    <Button text="迷路の新規探索" onAction="#onSearchButtonClicked"/>
+                </HBox>
+                <HBox spacing="10">
+                    <Label text="seed(long値):" prefHeight="20"/>
+                    <TextField fx:id="searchSeed" prefHeight="20"/>
+                    <Label text="探索にかかった時間:" prefHeight="20"/>
+                    <Label fx:id="searchUsedTimeLabel" prefWidth="100" prefHeight="20"/>
+                </HBox>
             </VBox>
         </HBox>
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="2" alignment="CENTER_LEFT" spacing="10">
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" spacing="10">
             <VBox>
-                <Label text="generation:" maxWidth="Infinity"/>
-                <Label text="search:" maxWidth="Infinity"/>
+                <Label text="生成の再生終了時:" prefHeight="20"/>
+                <Label text="探索の再生終了時:" prefHeight="20"/>
             </VBox>
             <VBox>
-                <Label fx:id="generationUsedTime"/>
-                <Label fx:id="searchUsedTime"/>
+                <ComboBox fx:id="generationNextActionCombo" prefHeight="20"/>
+                <ComboBox fx:id="searchNextActionCombo" prefHeight="20"/>
+            </VBox>
+            <VBox>
+                <Label text="+" prefHeight="20"/>
+                <Label text="+" prefHeight="20"/>
+            </VBox>
+            <VBox>
+                <ComboBox fx:id="generationNextPlayCombo" prefHeight="20"/>
+                <ComboBox fx:id="searchNextPlayCombo" prefHeight="20"/>
             </VBox>
         </HBox>
     </GridPane>
     <HBox alignment="CENTER" spacing="10">
         <ToggleButton fx:id="playButton" styleClass="play-button" minWidth="32" minHeight="32" onAction="#onPlayButtonClicked"/>
         <ToggleButton styleClass="speed-button" minWidth="32" minHeight="32" onAction="#onSpeedButtonClicked"/>
-        <Slider fx:id="logSlider"/>
-        <Label fx:id="logLabel" prefWidth="100"/>
-        <CheckBox text="表示切替" onAction="#onDisplayChanged"/>
+        <Slider fx:id="logSlider"  prefHeight="20"/>
+        <Label fx:id="logLabel" prefWidth="100"  prefHeight="20"/>
+        <Label fx:id="stateLabel"  prefHeight="20"/>
+        <Button text="切替"  prefHeight="20" onAction="#onStateButtonClicked"/>
+    </HBox>
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="表示サイズ(1～50)"  prefHeight="20"/>
+        <Spinner fx:id="viewSizeSpinner" prefWidth="80" prefHeight="20"/>
+        <CheckBox fx:id="thinCheck" text="壁を細く" onAction="#onDisplayChanged"/>
     </HBox>
     <HBox alignment="CENTER" spacing="10">
         <ScrollPane fx:id="mazePane">

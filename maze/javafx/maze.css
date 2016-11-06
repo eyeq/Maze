@@ -1,3 +1,12 @@
+.button {
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#64B2F4, #067FF0);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#067FF0, #64B2F4);
+}
+
 .play-button {
     -fx-background-color: null;
     -fx-border-image-slice: 0 0 0 0 fill;

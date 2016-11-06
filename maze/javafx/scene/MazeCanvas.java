@@ -14,9 +14,13 @@ public class MazeCanvas extends Canvas {
         GraphicsContext graphics = getGraphicsContext2D();
         for(int i = 0; i < maze.getWidth(); i++) {
             for(int j = 0; j < maze.getHeight(); j++) {
-                drawTile(graphics, i, j, (maze.getTile(i, j) == MazeData.Tile.PATH) ? Color.WHITE : Color.BLACK);
+                draw(graphics, i, j, maze.getTile(i, j));
             }
         }
+    }
+
+    public void draw(GraphicsContext graphics, int x, int y, MazeData.Tile tile) {
+        drawTile(graphics, x, y, (tile == MazeData.Tile.PATH) ? Color.WHITE : Color.BLACK);
     }
 
     public void drawTile(GraphicsContext graphics, int x, int y, Paint paint) {
@@ -24,7 +28,6 @@ public class MazeCanvas extends Canvas {
     }
 
     public void drawTile(GraphicsContext graphics, int x, int y, Paint paint, String text, Paint textPaint) {
-        graphics.setFill(paint);
         int x0 = x * (tileSize + wallWeight) / 2;
         int y0 = y * (tileSize + wallWeight) / 2;
         int width = tileSize;
@@ -39,6 +42,7 @@ public class MazeCanvas extends Canvas {
         } else {
             y0 += (wallWeight - tileSize) / 2;
         }
+        graphics.setFill(paint);
         graphics.fillRect(x0, y0, width, height);
         if(text != null) {
             graphics.setFill(textPaint);
